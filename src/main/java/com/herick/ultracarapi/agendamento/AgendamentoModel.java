@@ -21,7 +21,7 @@ public class AgendamentoModel {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
 
-  private Long clienteId;
+  private Long clienteId; // todo relacionar cliente a tarefa
   private LocalDateTime dataAgendamento;
   private String descricaoServico;
   private StatusServico status;
