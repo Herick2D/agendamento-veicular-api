@@ -1,5 +1,8 @@
 package com.herick.ultracarapi.integration;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.herick.ultracarapi.cliente.ClienteDTO;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,21 +11,27 @@ import java.net.http.HttpResponse;
 
 public class ViaCepService {
 
-  public static String buscarEnderecoCep(String cep) throws IOException, InterruptedException {
-    String url = "https://viacep.com.br/ws/" + cep + "/json/";
+  public static ViaCepEndereco buscarEnderecoCep(String cep) {
+    try {
+      ObjectMapper mapper = new ObjectMapper();
 
-    HttpClient client = HttpClient.newHttpClient();
+      String url = "https://viacep.com.br/ws/" + cep + "/json/";
 
-    HttpRequest request = HttpRequest.newBuilder()
-        .uri(URI.create(url))
-        .build();
+      HttpClient client = HttpClient.newHttpClient();
 
-    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+      HttpRequest request = HttpRequest.newBuilder()
+          .uri(URI.create(url))
+          .build();
 
-    if (response.statusCode() == 200) {
-      return response.body();
-    } else {
-      throw new RuntimeException("Erro ao buscar o CEP: " + response.statusCode());
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+      if (response.statusCode() == 200) {
+        return mapper.readValue(response.body(), ViaCepEndereco.class);
+      } else {
+        return null;
+      }
+    } catch (IOException | InterruptedException e) {
+      return null;
     }
   }
 }

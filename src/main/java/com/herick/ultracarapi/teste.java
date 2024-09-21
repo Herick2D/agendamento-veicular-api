@@ -1,16 +1,16 @@
 //package com.herick.ultracarapi;
 //
 //import com.herick.ultracarapi.cliente.ClienteModel;
+//import com.herick.ultracarapi.integration.ViaCepEndereco;
 //import com.herick.ultracarapi.integration.ViaCepService;
 //
 //import java.io.IOException;
 //
 //public class teste {
 //  public static void main(String[] args) {
-//    ClienteModel cliente = new ClienteModel(16347164L, "25931842");
 //
 //    try {
-//      String endereco = ViaCepService.buscarEnderecoCep(cliente.getEndereco());
+//      ViaCepEndereco endereco = ViaCepService.buscarEnderecoCep("25931842");
 //
 //      System.out.println("Endereço: " + endereco);
 //

@@ -12,6 +12,12 @@ public class ClienteDTO {
   private String nome;
   private String cpf;
   private List<VeiculoModel> veiculos;
-  private String endereco;
+  private Endereco endereco;
+
+  @Data
+  public class Endereco {
+    private String cep;
+    private String numero;
+  }
 
 }

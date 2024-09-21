@@ -18,7 +18,7 @@ public class ClienteController {
   ClienteService clienteService;
 
   @PostMapping
-  public ResponseEntity<ClienteModel> cadastrarCliente(@RequestBody ClienteModel cliente) {
+  public ResponseEntity<ClienteModel> cadastrarCliente(@RequestBody ClienteDTO cliente) {
     return ResponseEntity.status(201).body(clienteService.criarCliente(cliente));
   }
 

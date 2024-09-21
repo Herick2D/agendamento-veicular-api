@@ -10,6 +10,4 @@ public class AgendamentoDTO {
   private Long clienteId;
   private LocalDateTime dataAgendamento;
   private String descricaoServico;
-  private StatusServico status;
-
 }

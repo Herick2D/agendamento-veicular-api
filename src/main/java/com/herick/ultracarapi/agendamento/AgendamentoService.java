@@ -1,5 +1,7 @@
 package com.herick.ultracarapi.agendamento;
 
+import com.herick.ultracarapi.cliente.ClienteModel;
+import com.herick.ultracarapi.cliente.ClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,16 +15,26 @@ public class AgendamentoService {
 
   AgendamentoRepository agendamentoRepository;
 
+  ClienteService clienteService;
+
   public AgendamentoModel atualizarAgendamento(Long id, AgendamentoDTO agendamentoDTO) {
     AgendamentoModel entidade = agendamentoRepository.findById(id).orElse(null);
     entidade.setDataAgendamento(agendamentoDTO.getDataAgendamento());
     entidade.setDescricaoServico(agendamentoDTO.getDescricaoServico());
-    entidade.setStatus(agendamentoDTO.getStatus());
+//    entidade.setStatus(agendamentoDTO.getStatus());
     return agendamentoRepository.save(entidade); // todo criar verificações para agendamentoDTO caso campos estejam vazios
   }
 
-  public AgendamentoModel agendar(AgendamentoModel agendamento) {
-    return agendamentoRepository.save(agendamento);
+  public AgendamentoDTO agendar(AgendamentoDTO agendamento) {
+    AgendamentoModel entidade = new AgendamentoModel();
+    ClienteModel cliente = clienteService.buscarCliente(agendamento.getClienteId()); // todo verificar caso o cliente exista, resposta atual falso positivo
+    entidade.setStatus(StatusServico.PENDENTE);
+    entidade.setCliente(cliente);
+    entidade.setDataAgendamento(agendamento.getDataAgendamento());
+    entidade.setDescricaoServico(agendamento.getDescricaoServico());
+    AgendamentoModel resultado = agendamentoRepository.save(entidade);
+    agendamento.setId(resultado.getId());
+    return agendamento;
   }
 
   public AgendamentoModel buscarAgendamento() { // todo criar paginação

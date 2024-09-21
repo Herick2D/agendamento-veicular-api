@@ -1,10 +1,12 @@
 package com.herick.ultracarapi.cliente;
 
 import com.herick.ultracarapi.veiculo.VeiculoModel;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,13 +21,14 @@ import java.util.List;
 public class ClienteModel {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String nome;
-  private String cpf;
+  private String cpf; // todo validar cpf
 
-  @OneToMany
+  @OneToMany(cascade = CascadeType.PERSIST)
   private List<VeiculoModel> veiculos;
-  private String endereco; // todo consertar endereço;
 
+  @ManyToOne(cascade = CascadeType.PERSIST)
+  private Endereco endereco;
 }
