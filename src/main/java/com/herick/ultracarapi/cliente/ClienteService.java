@@ -11,11 +11,22 @@ public class ClienteService {
 
   ClienteRepository clienteRepository;
 
-  public ClienteModel atualizarCliente(Long id, ClienteDTO clienteDTO) {
+  public ClienteModel atualizarCliente(Long id, ClienteDTO cliente) {
+    ViaCepEndereco viaCepEndereco = ViaCepService.buscarEnderecoCep(cliente.getEndereco().getCep());
     ClienteModel entidade = clienteRepository.findById(id).orElse(null);
-    entidade.setNome(clienteDTO.getNome());
-//    entidade.setEndereco(clienteDTO.getCep()); // todo atualizar o endereço no método PUT
-    entidade.setVeiculos(clienteDTO.getVeiculos());
+    Endereco endereco = new Endereco();
+    entidade.setNome(cliente.getNome());
+    endereco.setRua(viaCepEndereco.getLogradouro());
+    endereco.setNumero(cliente.getEndereco().getNumero());
+    endereco.setComplemento(viaCepEndereco.getComplemento());
+    endereco.setBairro(viaCepEndereco.getBairro());
+    endereco.setCidade(viaCepEndereco.getLocalidade());
+    endereco.setUf(viaCepEndereco.getUf());
+
+    entidade.setNome(cliente.getNome());
+    entidade.setCpf(cliente.getCpf());
+    entidade.setEndereco(endereco);
+    entidade.getVeiculos().addAll(cliente.getVeiculos());
     return clienteRepository.save(entidade); // todo criar verificação para clienteDTO caso campos estejam vazios
   }
 

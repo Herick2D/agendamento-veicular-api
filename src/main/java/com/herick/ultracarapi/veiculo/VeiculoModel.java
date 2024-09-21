@@ -21,5 +21,4 @@ public class VeiculoModel {
   private String marca;
   private int ano;
 
-//  private long idCliente;
 }
