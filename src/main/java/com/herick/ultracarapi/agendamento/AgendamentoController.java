@@ -21,7 +21,7 @@ public class AgendamentoController {
 
   @PostMapping
   public ResponseEntity<ResponseEntity> agendar(@RequestBody AgendamentoDTO agendamento) {
-    return ResponseEntity.status(201).body(agendamentoService.agendar(agendamento));
+    return agendamentoService.agendar(agendamento);
   }
 
   @GetMapping("/{clienteId}")

@@ -52,7 +52,12 @@ public class AgendamentoService {
     }
 
     AgendamentoModel entidade = new AgendamentoModel();
-    ClienteModel cliente = clienteService.buscarCliente(agendamento.getClienteId()); // todo verificar caso o cliente exista, resposta atual falso positivo
+    ClienteModel cliente = clienteService.buscarCliente(agendamento.getClienteId());
+
+    if (cliente == null) {
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body("Cliente inexistente");
+    }
 
     entidade.setStatus(StatusServico.PENDENTE);
     entidade.setCliente(cliente);
