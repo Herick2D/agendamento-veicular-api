@@ -18,7 +18,7 @@ public class ClienteDTO {
   private Endereco endereco;
 
   @Data
-  public static class Endereco {
+  public class Endereco {
     private String cep;
     private String numero;
   }

@@ -1,5 +1,6 @@
 package com.herick.ultracarapi.agendamento;
 
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,22 +25,27 @@ public class AgendamentoController {
 
   private AgendamentoService agendamentoService;
 
+  @Operation(description = "Agenda um novo serviço")
   @PostMapping
   public ResponseEntity<ResponseEntity> agendar(@RequestBody AgendamentoDTO agendamento) {
     return agendamentoService.agendar(agendamento);
   }
 
+  @Operation(description = "Busca todos os agendamentos do cliente indicado pelo seu ID")
   @GetMapping("/{clienteId}")
   public ResponseEntity<List<AgendamentoModel>> buscarAgendamentoPorId(@PathVariable Long clienteId) {
     List<AgendamentoModel> agendamentoPesquisado = agendamentoService.buscarAgendamentosCliente(clienteId);
     return ResponseEntity.ok(agendamentoPesquisado);
   }
 
+  @Operation(description = "Busca todos os agendamentos em uma estrutura paginada")
   @GetMapping
   public ResponseEntity<Page<AgendamentoModel>> buscarAgendamentos(Pageable pageable) {
     Page<AgendamentoModel> agendamentos = agendamentoService.buscarAgendamento(pageable);
     return ResponseEntity.ok(agendamentos);
   }
+
+  @Operation(description = "Busca todos os agendamentos em um período estipulado")
   @GetMapping("/periodo")
   public ResponseEntity<List<AgendamentoModel>> buscarAgendamentosPorPeriodo(
       @RequestParam("inicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime inicio,
@@ -49,6 +55,7 @@ public class AgendamentoController {
     return ResponseEntity.ok(agendamentos);
   }
 
+  @Operation(description = "Atualiza o agendamento indicado pelo seu ID")
   @PutMapping("/{agendamentoId}")
   public ResponseEntity<ResponseEntity<?>> atualizaAgendamento(@PathVariable Long agendamentoId, @RequestBody AgendamentoDTO agendamentoDTO) {
     ResponseEntity<?> agendamentoAtualizado = agendamentoService.atualizarAgendamento(agendamentoId, agendamentoDTO);
