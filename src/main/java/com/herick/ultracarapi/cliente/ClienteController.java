@@ -2,6 +2,7 @@ package com.herick.ultracarapi.cliente;
 
 import com.herick.ultracarapi.veiculo.VeiculoModel;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,21 +23,20 @@ public class ClienteController {
   ClienteService clienteService;
 
   @PostMapping
-  public ResponseEntity<ClienteModel> cadastrarCliente(@RequestBody ClienteDTO cliente) {
+  public ResponseEntity<ClienteModel> cadastrarCliente(@Valid @RequestBody ClienteDTO cliente) {
     return ResponseEntity.status(201).body(clienteService.criarCliente(cliente));
   }
 
   @GetMapping("/{clienteId}")
   public ClienteModel buscarCliente(@PathVariable Long clienteId) {
-    ClienteModel cliente = clienteService.buscarCliente(clienteId);
-    return cliente;
+    return clienteService.buscarCliente(clienteId);
   }
 
   @PutMapping("/{clienteId}")
-  public ResponseEntity<ClienteModel> atualizarCliente(@PathVariable Long clienteId, @RequestBody ClienteDTO cliente) {
-    ClienteModel clienteAtualizado = clienteService.atualizarCliente(clienteId, cliente);
-    return ResponseEntity.ok(clienteAtualizado);
+  public ResponseEntity<?> atualizarCliente(@PathVariable Long clienteId, @RequestBody ClienteDTO cliente) {
+    return clienteService.atualizarCliente(clienteId, cliente);
   }
+
 
   @DeleteMapping("/{clienteId}/veiculos")
   public ResponseEntity<?> removerVeiculoPorPlaca(@PathVariable Long clienteId, @RequestBody VeiculoModel veiculo) {

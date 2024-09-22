@@ -3,12 +3,15 @@ package com.herick.ultracarapi.agendamento;
 import com.herick.ultracarapi.cliente.ClienteModel;
 import com.herick.ultracarapi.cliente.ClienteService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @AllArgsConstructor
@@ -20,11 +23,11 @@ public class AgendamentoService {
 
   public ResponseEntity<?> atualizarAgendamento(Long id, AgendamentoDTO agendamentoDTO) {
     LocalDateTime dataAtual = LocalDateTime.now();
+    boolean update = false;
 
     if (dataAtual.isAfter(agendamentoDTO.getDataAgendamento())) {
-      var mensagemDeValidacao = ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
           .body("A data do agendamento não pode ser anterior à data atual.");
-      return mensagemDeValidacao;
     }
 
     AgendamentoModel entidade = agendamentoRepository.findById(id).orElse(null);
@@ -33,11 +36,21 @@ public class AgendamentoService {
           .body("Agendamento não encontrando");
     }
 
-    entidade.setDataAgendamento(agendamentoDTO.getDataAgendamento());
-    entidade.setDescricaoServico(agendamentoDTO.getDescricaoServico());
-    entidade.setStatus(agendamentoDTO.getStatus());
-    var resultado = agendamentoRepository.save(entidade); // todo criar verificações para agendamentoDTO caso campos estejam vazios
+    if (Objects.nonNull(agendamentoDTO.getDataAgendamento())) {
+      entidade.setDataAgendamento(agendamentoDTO.getDataAgendamento());
+      update = true;
+    }
 
+    if (Objects.nonNull(agendamentoDTO.getDescricaoServico())) {
+      entidade.setDescricaoServico(agendamentoDTO.getDescricaoServico());
+      update = true;
+    }
+
+    if (Objects.nonNull(agendamentoDTO.getStatus())) {
+      entidade.setStatus(agendamentoDTO.getStatus());
+      update = true;
+    }
+    var resultado = update ? agendamentoRepository.save(entidade) : entidade;
     return ResponseEntity.status(HttpStatus.OK).body(resultado);
   }
 
@@ -46,9 +59,8 @@ public class AgendamentoService {
     LocalDateTime dataAtual = LocalDateTime.now();
 
     if (dataAtual.isAfter(agendamento.getDataAgendamento())) {
-      var mensagemDeValidacao = ResponseEntity.status(HttpStatus.BAD_REQUEST)
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
           .body("A data do agendamento não pode ser anterior à data atual.");
-      return mensagemDeValidacao;
     }
 
     AgendamentoModel entidade = new AgendamentoModel();
@@ -71,20 +83,16 @@ public class AgendamentoService {
     return ResponseEntity.status(HttpStatus.OK).body(resultado);
   }
 
-  public AgendamentoModel buscarAgendamento() { // todo criar paginação
-    return null;
+  public Page<AgendamentoModel> buscarAgendamento(Pageable pageable) {
+    return agendamentoRepository.findAll(pageable);
   }
 
   public List<AgendamentoModel> buscarAgendamentosCliente(Long clienteId) {
     return agendamentoRepository.findAllByClienteId(clienteId);
   }
 
-  public AgendamentoModel buscarAgendamento(Long agendamentoId) {
-    return agendamentoRepository.findById(agendamentoId).orElse(null);
-  }
-
-  public AgendamentoModel buscarAgendamento(LocalDateTime periodo) { // todo buscar agendamento período determinado BETWEEN
-    return null;
+  public List<AgendamentoModel> buscarAgendamentos(LocalDateTime inicio, LocalDateTime fim) {
+    return agendamentoRepository.findByDataAgendamentoBetween(inicio, fim);
   }
 
 
