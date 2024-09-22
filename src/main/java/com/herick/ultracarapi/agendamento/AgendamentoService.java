@@ -18,12 +18,27 @@ public class AgendamentoService {
 
   ClienteService clienteService;
 
-  public AgendamentoModel atualizarAgendamento(Long id, AgendamentoDTO agendamentoDTO) {
+  public ResponseEntity<?> atualizarAgendamento(Long id, AgendamentoDTO agendamentoDTO) {
+    LocalDateTime dataAtual = LocalDateTime.now();
+
+    if (dataAtual.isAfter(agendamentoDTO.getDataAgendamento())) {
+      var mensagemDeValidacao = ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body("A data do agendamento não pode ser anterior à data atual.");
+      return mensagemDeValidacao;
+    }
+
     AgendamentoModel entidade = agendamentoRepository.findById(id).orElse(null);
+    if (entidade == null) {
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body("Agendamento não encontrando");
+    }
+
     entidade.setDataAgendamento(agendamentoDTO.getDataAgendamento());
     entidade.setDescricaoServico(agendamentoDTO.getDescricaoServico());
     entidade.setStatus(agendamentoDTO.getStatus());
-    return agendamentoRepository.save(entidade); // todo criar verificações para agendamentoDTO caso campos estejam vazios
+    var resultado = agendamentoRepository.save(entidade); // todo criar verificações para agendamentoDTO caso campos estejam vazios
+
+    return ResponseEntity.status(HttpStatus.OK).body(resultado);
   }
 
   public ResponseEntity agendar(AgendamentoDTO agendamento) {
