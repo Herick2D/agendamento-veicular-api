@@ -20,7 +20,7 @@ public class AgendamentoController {
   private AgendamentoService agendamentoService;
 
   @PostMapping
-  public ResponseEntity<AgendamentoDTO> agendar(@RequestBody AgendamentoDTO agendamento) {
+  public ResponseEntity<ResponseEntity> agendar(@RequestBody AgendamentoDTO agendamento) {
     return ResponseEntity.status(201).body(agendamentoService.agendar(agendamento));
   }
 

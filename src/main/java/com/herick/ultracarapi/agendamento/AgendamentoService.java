@@ -3,11 +3,12 @@ package com.herick.ultracarapi.agendamento;
 import com.herick.ultracarapi.cliente.ClienteModel;
 import com.herick.ultracarapi.cliente.ClienteService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -25,7 +26,16 @@ public class AgendamentoService {
     return agendamentoRepository.save(entidade); // todo criar verificações para agendamentoDTO caso campos estejam vazios
   }
 
-  public AgendamentoDTO agendar(AgendamentoDTO agendamento) {
+  public ResponseEntity agendar(AgendamentoDTO agendamento) {
+
+    LocalDateTime dataAtual = LocalDateTime.now();
+
+    if (dataAtual.isAfter(agendamento.getDataAgendamento())) {
+      var mensagemDeValidacao = ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body("A data do agendamento não pode ser anterior à data atual.");
+      return mensagemDeValidacao;
+    }
+
     AgendamentoModel entidade = new AgendamentoModel();
     ClienteModel cliente = clienteService.buscarCliente(agendamento.getClienteId()); // todo verificar caso o cliente exista, resposta atual falso positivo
 
@@ -38,7 +48,7 @@ public class AgendamentoService {
 
     agendamento.setId(resultado.getId());
     agendamento.setStatus(resultado.getStatus());
-    return agendamento;
+    return ResponseEntity.status(HttpStatus.OK).body(resultado);
   }
 
   public AgendamentoModel buscarAgendamento() { // todo criar paginação
@@ -56,7 +66,6 @@ public class AgendamentoService {
   public AgendamentoModel buscarAgendamento(LocalDateTime periodo) { // todo buscar agendamento período determinado BETWEEN
     return null;
   }
-
 
 
 }
