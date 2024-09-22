@@ -35,7 +35,7 @@ public class ClienteModel {
   @ManyToOne(cascade = CascadeType.PERSIST)
   private Endereco endereco;
 
-  public void setCpf(String cpf) {
+  public void setCpf(String cpf) { // Método usa uma validador externo para verificar o CPF
     CPFValidator validador = new CPFValidator();
     try {
       validador.assertValid(cpf);
@@ -45,7 +45,7 @@ public class ClienteModel {
     }
   }
 
-  public void conferirVeiculo(List<VeiculoModel> novosVeiculos) {
+  public void conferirVeiculo(List<VeiculoModel> novosVeiculos) { // Método intera sobre os veiculos do cliente, caso a placa seja uma nova placa, ele adiciona na lista de veiculos, caso não, ele faz as devidas alterações
     for (VeiculoModel novoVeiculo : novosVeiculos) {
       boolean veiculoExiste = false;
 

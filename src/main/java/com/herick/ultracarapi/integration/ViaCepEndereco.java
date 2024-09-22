@@ -3,7 +3,7 @@ package com.herick.ultracarapi.integration;
 import lombok.Data;
 
 @Data
-public class ViaCepEndereco {
+public class ViaCepEndereco { // Classe criado apenas para registrar e assim poder filtrar e registrar da melhor forma para aplicação junto ao mapper
   private String logradouro;
   private String complemento;
   private String bairro;

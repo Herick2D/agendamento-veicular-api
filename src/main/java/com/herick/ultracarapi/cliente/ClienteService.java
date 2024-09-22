@@ -93,7 +93,7 @@ public class ClienteService {
     return clienteRepository.findById(clienteId).orElse(null);
   }
 
-  public void removerVeiculoPorPlaca(Long clienteId, String placa) {
+  public void removerVeiculoPorPlaca(Long clienteId, String placa) { // Método criado para ser utilizado na lógica do endpoint de mesmo nome
     ClienteModel cliente = clienteRepository.findById(clienteId)
         .orElseThrow(() -> new EntityNotFoundException("Cliente não encontrado"));
 

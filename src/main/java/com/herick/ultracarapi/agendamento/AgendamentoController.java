@@ -25,6 +25,8 @@ public class AgendamentoController {
 
   private AgendamentoService agendamentoService;
 
+  // ENDPOINTS da Entidade Agendamento
+
   @Operation(description = "Agenda um novo serviço")
   @PostMapping
   public ResponseEntity<ResponseEntity> agendar(@RequestBody AgendamentoDTO agendamento) {
@@ -40,7 +42,7 @@ public class AgendamentoController {
 
   @Operation(description = "Busca todos os agendamentos em uma estrutura paginada")
   @GetMapping
-  public ResponseEntity<Page<AgendamentoModel>> buscarAgendamentos(Pageable pageable) {
+  public ResponseEntity<Page<AgendamentoModel>> buscarAgendamentos(Pageable pageable) { // Endpoint tratado com Pageable pensando na versatilidade de buscar todos os agendamentos e tratar em diferentes páginas para tratamento de maneira devida
     Page<AgendamentoModel> agendamentos = agendamentoService.buscarAgendamento(pageable);
     return ResponseEntity.ok(agendamentos);
   }

@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD, ElementType.PARAMETER})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = NomeValidator.class)
-public @interface Nome {
+public @interface Nome { // Anotação criada como material de estudo e validação do campo nome
   String message() default "Nome inválido";
 
   Class<?>[] groups() default {};

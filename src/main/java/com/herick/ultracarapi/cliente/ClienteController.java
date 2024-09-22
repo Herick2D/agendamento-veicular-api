@@ -23,6 +23,8 @@ public class ClienteController {
 
   ClienteService clienteService;
 
+  // ENDPOINTS da Entidade Cliente
+
   @Operation(description = "Cadastra um novo cliente")
   @PostMapping
   public ResponseEntity<ClienteModel> cadastrarCliente(@Valid @RequestBody ClienteDTO cliente) {
@@ -41,12 +43,11 @@ public class ClienteController {
     return clienteService.atualizarCliente(clienteId, cliente);
   }
 
-
   @Operation(description = "Permite deletar um veículo pela sua placa, o cliente deve ser indicado pelo ID")
   @DeleteMapping("/{clienteId}/veiculos")
   public ResponseEntity<?> removerVeiculoPorPlaca(@PathVariable Long clienteId, @RequestBody VeiculoModel veiculo) {
     try {
-      clienteService.removerVeiculoPorPlaca(clienteId, veiculo.getPlaca());
+      clienteService.removerVeiculoPorPlaca(clienteId, veiculo.getPlaca()); // Try Catch iniciado para verificar caso o RequestBody passe uma placa inexistente, assim posso capturar o erro e tratar de forma mais adequada
       return ResponseEntity.ok("Veículo removido com sucesso");
     } catch (EntityNotFoundException e) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());

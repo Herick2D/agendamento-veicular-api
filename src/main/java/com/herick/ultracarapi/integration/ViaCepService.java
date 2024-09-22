@@ -1,7 +1,6 @@
 package com.herick.ultracarapi.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.herick.ultracarapi.cliente.ClienteDTO;
 
 import java.io.IOException;
 import java.net.URI;
@@ -9,11 +8,11 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
-public class ViaCepService {
+public class ViaCepService { // Lógica para consumir API solicitada no desafio técnico
 
   public static ViaCepEndereco buscarEnderecoCep(String cep) {
     try {
-      ObjectMapper mapper = new ObjectMapper();
+      ObjectMapper mapper = new ObjectMapper(); // Mapper criado para iterar sobre a resposta da API e poder trabalhar com as informações relevantes para o cliente
 
       String url = "https://viacep.com.br/ws/" + cep + "/json/";
 
