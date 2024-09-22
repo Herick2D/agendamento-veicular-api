@@ -26,7 +26,7 @@ public class ClienteModel {
   private String nome;
   private String cpf; // todo validar cpf
 
-  @OneToMany(cascade = CascadeType.ALL)
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
   private List<VeiculoModel> veiculos;
 
   @ManyToOne(cascade = CascadeType.PERSIST)
