@@ -19,5 +19,4 @@ public class ClienteDTO {
     private String cep;
     private String numero;
   }
-
 }
