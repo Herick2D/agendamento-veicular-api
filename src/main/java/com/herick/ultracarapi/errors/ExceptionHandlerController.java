@@ -1,4 +1,4 @@
-package com.herick.agendamentoveicularapi.errors;
+package com.herick.ultracarapi.errors;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

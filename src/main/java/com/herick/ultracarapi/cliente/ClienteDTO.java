@@ -1,7 +1,7 @@
-package com.herick.agendamentoveicularapi.cliente;
+package com.herick.ultracarapi.cliente;
 
-import com.herick.agendamentoveicularapi.validators.Nome;
-import com.herick.agendamentoveicularapi.veiculo.VeiculoModel;
+import com.herick.ultracarapi.validators.Nome;
+import com.herick.ultracarapi.veiculo.VeiculoModel;
 import lombok.Data;
 
 import java.util.List;

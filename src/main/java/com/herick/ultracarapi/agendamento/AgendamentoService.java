@@ -1,7 +1,7 @@
-package com.herick.agendamentoveicularapi.agendamento;
+package com.herick.ultracarapi.agendamento;
 
-import com.herick.agendamentoveicularapi.cliente.ClienteModel;
-import com.herick.agendamentoveicularapi.cliente.ClienteService;
+import com.herick.ultracarapi.cliente.ClienteModel;
+import com.herick.ultracarapi.cliente.ClienteService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

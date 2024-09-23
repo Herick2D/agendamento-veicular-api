@@ -1,4 +1,4 @@
-package com.herick.agendamentoveicularapi.agendamento;
+package com.herick.ultracarapi.agendamento;
 
 import lombok.Data;
 import java.time.LocalDateTime;

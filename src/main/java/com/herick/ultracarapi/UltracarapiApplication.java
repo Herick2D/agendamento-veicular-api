@@ -1,13 +1,13 @@
-package com.herick.agendamentoveicularapi;
+package com.herick.ultracarapi;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AgendamentoveicularapiApplication {
+public class UltracarapiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AgendamentoveicularapiApplication.class, args);
+		SpringApplication.run(UltracarapiApplication.class, args);
 	}
 
 }

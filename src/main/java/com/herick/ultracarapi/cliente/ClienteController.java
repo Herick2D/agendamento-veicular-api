@@ -1,6 +1,6 @@
-package com.herick.agendamentoveicularapi.cliente;
+package com.herick.ultracarapi.cliente;
 
-import com.herick.agendamentoveicularapi.veiculo.VeiculoModel;
+import com.herick.ultracarapi.veiculo.VeiculoModel;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;

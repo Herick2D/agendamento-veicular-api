@@ -1,4 +1,4 @@
-package com.herick.agendamentoveicularapi.agendamento;
+package com.herick.ultracarapi.agendamento;
 
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;

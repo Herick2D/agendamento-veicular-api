@@ -1,4 +1,4 @@
-package com.herick.agendamentoveicularapi.integration;
+package com.herick.ultracarapi.integration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
