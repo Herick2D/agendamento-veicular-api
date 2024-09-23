@@ -11,7 +11,7 @@
 	<groupId>com.herick</groupId>
 	<artifactId>ultracarapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>ultracarapi</name>
+	<name>agendamento-veicular-api</name>
 	<description>api desenvolvida com fins avaliativos</description>
 	<url/>
 	<licenses>
