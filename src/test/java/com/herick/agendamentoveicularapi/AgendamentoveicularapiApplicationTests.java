@@ -1,10 +1,10 @@
-package com.herick.ultracarapi;
+package com.herick.agendamentoveicularapi;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UltracarapiApplicationTests {
+class AgendamentoveicularapiApplicationTests {
 
 	@Test
 	void contextLoads() {

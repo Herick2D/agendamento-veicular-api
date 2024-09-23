@@ -1,4 +1,4 @@
-package com.herick.ultracarapi.integration;
+package com.herick.agendamentoveicularapi.integration;
 
 import lombok.Data;
 

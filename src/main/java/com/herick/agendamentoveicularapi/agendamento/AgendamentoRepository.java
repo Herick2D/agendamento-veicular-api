@@ -1,4 +1,4 @@
-package com.herick.ultracarapi.agendamento;
+package com.herick.agendamentoveicularapi.agendamento;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

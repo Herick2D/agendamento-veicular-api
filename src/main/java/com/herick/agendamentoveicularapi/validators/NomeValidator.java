@@ -1,4 +1,4 @@
-package com.herick.ultracarapi.validators;
+package com.herick.agendamentoveicularapi.validators;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

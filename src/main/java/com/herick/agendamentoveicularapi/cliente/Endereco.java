@@ -1,4 +1,4 @@
-package com.herick.ultracarapi.cliente;
+package com.herick.agendamentoveicularapi.cliente;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

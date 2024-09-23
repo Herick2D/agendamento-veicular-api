@@ -1,4 +1,4 @@
-package com.herick.ultracarapi.agendamento;
+package com.herick.agendamentoveicularapi.agendamento;
 
 public enum StatusServico {
   PENDENTE,
