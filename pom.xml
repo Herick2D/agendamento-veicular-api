@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.herick</groupId>
-	<artifactId>ultracarapi</artifactId>
+	<artifactId>agendamento-veicular-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>agendamento-veicular-api</name>
 	<description>api desenvolvida com fins avaliativos</description>
