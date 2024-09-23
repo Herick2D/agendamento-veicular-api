@@ -10,14 +10,15 @@
 - **Lombok**
 - **Swagger OpenAPI**
 
-## Instruções para Rodar o Projeto Localmente
+## Instruções para Rodar o Projeto
 
 ### Pré-requisitos
 
 - Java 17;
 - Maven;
 - PostgreSql;
-- Docker (opcional para rodar o banco de dados);
+- IDE (preferencialmente Intellij IDEA);
+- Docker;
 - Lombok (instale a extensão Lombok no seu IDE);
 - Git;
 - Postman, insomnia ou a plataforma de testes de sua preferencia;
@@ -32,7 +33,7 @@
     spring.datasource.password=sua_senha
    ```
 
-### Executando a API
+### Executando a API Localmente
 
 1. Faça um clone do repositório:
     ```
@@ -47,6 +48,21 @@
     ./mvnw spring-boot:run
    ```
 4. A API estará disponível em http://localhost:8080.
+
+### Executando a API via docker
+
+1. Faça um clone do repositório:
+    ```
+   git clone https://github.com/Herick2D/agendamento-veicular-api.git
+   ```
+2. Navegue até a pasta do projeto:
+    ```
+    cd agendamento-veicular-api
+   ```
+3. Estando dentro da pasta da API use o seguinte comando:
+    ```
+    docker-compose up
+   ```
 
 ### Documentação Swagger
 
@@ -165,3 +181,7 @@ Usando a plataforma de testes de api de sua preferencia
     "descricaoServico": "balanceamento de pneus"
     }
     ```
+  
+### Observação
+Agradeço pela oportunidade de criar esta API como um projeto avaliativo.
+Estou à disposição para sanar quaisquer dívdas que você possa ter sobre o projeto.
